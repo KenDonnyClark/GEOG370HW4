@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script> 
+
+    <script src = "./conegrave.geojson"></script>
+    <script src = "./flatTop.geojson"></script>
+    <script src = "./bassLake.geojson"></script>
+</head>
+<body>
+
+    <div id= "mapID"></div>
+    <style>
+        #mapID{width: 1000px; height: 1000px;}
+
+    </style>
+
+    <script>
+        var map = L.map('mapID').setView([36.156,-81.677013], 15);
+
+        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {}).addTo(map)
+       
+        // L.geoJSON(uncwell).addTo(map)   
+
+        var coneGraveicon = L.icon({
+            iconUrl: 'https://www.wikitree.com/photo.php/thumb/8/8f/Lindau-7-1.jpg/300px-Lindau-7-1.jpg',
+            iconSize: [60,50],
+            popupAnchor: [0,0]
+
+
+        });
+
+        var conePopup =  "Grave of Moses Cone, textile company founder and philanthropist <br/><img src='https://streamingthruamerica.files.wordpress.com/2018/06/grave-site.jpg?w=1200'width='250px'/>";
+
+         L.geoJSON(coneGrave, { // a
+         pointToLayer: function (feature, latlng) { // b
+         return L.marker(latlng, {icon: coneGraveicon});}}) // c
+        .bindPopup(conePopup) // d
+        .addTo(map); //
+        
+        var flatTopIcon = L.icon({
+            iconUrl: 'https://www.hikingupward.com/NCSP/FlatTopTower/images/032815/P3280536.jpg',
+            iconSize: [60,50],
+            popupAnchor: [0,0]
+
+
+        });
+
+        var flatTopPopup =  "Flat Top mountain Fire Tower and lookout <br/><img src='https://www.blueridgehikingtrails.com/wp/wp-content/uploads/2015/05/Flat-Top-Tower-Moses-Cone-39.jpg'width='250px'/>";
+
+         L.geoJSON(flatTop, { // a
+         pointToLayer: function (feature, latlng) { // b
+         return L.marker(latlng, {icon: flatTopIcon});}}) // c
+        .bindPopup(flatTopPopup) // d
+        .addTo(map); //
+
+        var bassLakeicon = L.icon({
+            iconUrl: 'https://www.cardcow.com/images/set203/card00291_fr.jpg',
+            iconSize: [60,50],
+            popupAnchor: [0,0]
+
+
+        });
+
+        var bassLakePopup =  "Bass Lake, a recreational fishing and jogging spot. <br/><img src='https://advguides.com/wp-content/uploads/shutterstock_1278955570.jpg'width='250px'/>";
+
+         L.geoJSON(bassLake, { // a
+         pointToLayer: function (feature, latlng) { // b
+         return L.marker(latlng, {icon: bassLakeicon});}}) // c
+        .bindPopup(bassLakePopup) // d
+        .addTo(map); //
+    </script>
+
+
+</body>
+</html>
